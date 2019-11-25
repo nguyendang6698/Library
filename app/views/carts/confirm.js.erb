@@ -1,0 +1,10 @@
+var check = "<%= @cart.verify %>"
+if(check == 3)
+{
+	window.location.href = "/carts/"+"<%= @cart.id%>"
+	// console.log(check)
+}
+else
+{
+	window.location.href = "/my_cart/"+"<%= @user.id%>"
+}

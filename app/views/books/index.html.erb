@@ -1,0 +1,114 @@
+<%= render "banner" %>
+<div id="content" class="site-content">
+        <div id="primary" class="content-area">
+            <main id="main" class="site-main">
+                <div class="books-media-list">
+                    <div class="container">
+                        <div class="row">
+                               <%= render "search" %>
+                        </div>
+                    </div> 
+                </div>
+            </main>
+            <div class="row">
+                <div class="col-md-9 col-md-push-3">    
+                    <div class="filter-options margin-list">
+                        <div class="row">                                            
+                            <div class="col-md-4 col-sm-4", style="margin-top: 11px;">
+                                   <%= select_tag :sort, options_for_select(@sort), id:"list_sort", remote: true%>
+                            </div>
+                            <div class="col-md-4 col-sm-4">
+                                <div class="filter-result" >
+                                    <%= button_tag "Sort", id:"btn_sort"%>
+                                    <span>Showing items 1 to 9 of <%= Book.count%> total</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+              <div>
+                <div class="pagination" style="margin-left: 155px;"><%== pagy_bootstrap_nav(@pagy)%></div>
+                <div style="float: right; margin-right: 150px;">
+                  <% if current_user.role == 1 %>
+                     <a href="/books/new"><i class="fas fa-plus fa-4x " style="color: orange;" ></i></a>
+                  <% end %>
+                </div>
+              </div>
+                
+                <div class="booksmedia-fullwidth">
+                    <div class="row">
+                        <div class="col-md-10 col-md-push-1">  
+                            <ul id="book-index">              
+                                <%=render @books%>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="pagination"  style="margin-left: 155px; margin-bottom: 40px;"><%==pagy_bootstrap_nav(@pagy)%></div>
+            </div>
+                        
+        </div>
+</div>
+
+<script type="text/javascript">
+    $('#btn_sort').click(function(){
+        link = window.location.href + ".json"
+        var selected = $('#list_sort').val()
+        $.ajax({
+          type: "GET",
+          url: link,
+          dataType: 'json',
+          success: function(res){
+            res.sort(function(a, b) {
+
+              if (selected == "Name of book")
+              {
+                var nameA = a.name.toUpperCase(); // bỏ qua hoa thường
+                var nameB = b.name.toUpperCase(); // bỏ qua hoa thường
+              }
+              else if (selected == "Name of Author")
+              {
+                var nameA = a.author.name.toUpperCase(); // bỏ qua hoa thường
+                var nameB = b.author.name.toUpperCase(); // bỏ qua hoa thường
+              }
+              else if (selected == "Default")
+              {
+                var nameA = a.created_at.name; // bỏ qua hoa thường
+                var nameB = b.created_at.name;
+              }
+              if (nameA < nameB) {
+                return -1;
+              }
+              if (nameA > nameB) {
+                return 1;
+              }
+
+              // name trùng nhau
+              return 0;
+            });
+            console.log(res)
+            $.ajax({
+                type:"POST",
+                url: "/sort",
+                dataType: 'script',
+                data: {books: res},
+                success: function(response){
+                },
+                error:function(err){
+                    console.log(err)
+                }
+            })
+          },
+          error:function(error){
+            console.log(error)
+          }
+        });
+    })
+// alertify
+//   .alert("This is an alert dialog.", function(){
+//     alertify.message('OK');
+//   });
+</script>

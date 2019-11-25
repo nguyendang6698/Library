@@ -1,0 +1,19 @@
+<%= form_for r do |f| %>
+	<tr>
+		<% book = Book.find(r.book_id) %>
+		<td>
+			<a href="/books/<%= book.id%>">
+				<img src="<%= book.book_img %>", style="height: 120px; width: 70px">
+			</a>
+		</td>
+		<td><%= f.label :number,value: book.quantity, readonly: true%></td>
+		<td><%= f.number_field :number, in: 1..book.quantity, value:1%></td>
+		<td><%= f.date_field :datefrom, min: Date.today, value: Date.today, readonly: true%>
+		<td><%= f.date_field :dateto, min: Date.today+1, value: Date.today+1%></td>		
+		<td>
+			<%= link_to r, class: "remove remove-item", method: :delete, data:{confirm: "You sure?"} do %>
+            	<i class="fa fa-trash-o"></i>
+       		<% end %>
+    	</td>		
+	</tr>
+<% end %>

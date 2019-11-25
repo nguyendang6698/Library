@@ -1,0 +1,26 @@
+<!-- Start: Search Section -->
+<section class="search-filters">
+        <div class="container">
+            <div class="filter-box">
+                <h3>What are you looking for at the library?</h3>
+                     <%= search_form_for @q do |f| %>
+                        <div class="col-md-9 col-sm-6">
+                            <div class="form-group">
+                                <%= f.text_field :name_cont, class: "form-control",placeholder: "Search by name of book" %>
+                            </div>
+                        </div>
+                        <!-- <div class="col-md-5 col-sm-6">
+                            <div class="form-group">
+                              
+                            
+                            </div>
+                        </div> -->
+
+                        <div class="col-md-3 col-sm-6">
+                            <%= f.submit "Search", class: "form-control"%>
+                        </div>
+                    <% end %>  
+            </div>
+        </div>
+</section>
+<!-- End: Search Section -->

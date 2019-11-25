@@ -1,0 +1,8 @@
+a.book-author{
+   color: #ff7236;
+   :hover
+   {
+   	color: gray
+   }
+}
+

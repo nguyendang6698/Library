@@ -1,0 +1,48 @@
+<%= render "banner" %>
+<div id="content" class="site-content">
+        <div id="primary" class="content-area">
+            <main id="main" class="site-main">
+                <div class="books-media-list">
+                    <div class="container">
+                        <div class="row">
+                               <%= render "search" %>
+                        </div>
+                    </div> 
+                </div>
+            </main>
+            <div class="row">
+                  <div class="col-md-9 col-md-push-3">    
+                    <div class="filter-options margin-list">
+                        <div class="row">                                            
+                            <div class="col-md-4 col-sm-4">
+                                <select name="orderby">
+                                    <option selected="selected">Default sorting</option>
+                                    <option>Sort by popularity</option>
+                                    <option>Sort by rating</option>
+                                    <option>Sort by newness</option>
+                                    <option>Sort by price</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4 col-sm-4">
+                                <div class="filter-result">Showing items 1 to 9 of <%= Author.count%> total</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                 <div class="pagination" style="float: right; margin-right: 150px"><%== pagy_bootstrap_nav(@pagy)%></div>
+                <div class="booksmedia-fullwidth">
+                    <div class="row">
+                        <div class="col-md-10 col-md-push-1">  
+                            <ul>              
+                                <%=render @authors%>
+                            </ul>
+
+                        </div>
+                    </div>
+
+                </div>
+                <div style="float: right; margin-right: 150px; margin-bottom: 40px;"><%==pagy_bootstrap_nav(@pagy)%></div>
+            </div>
+                        
+        </div>
+</div>

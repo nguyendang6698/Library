@@ -1,0 +1,72 @@
+
+<!-- Start: Page Banner -->
+<section class="page-banner services-banner">
+    <div class="container">
+        <div class="banner-header">
+            <h2>Signin</h2>
+            <span class="underline center"></span>
+            <p class="lead">Proin ac eros pellentesque dolor pharetra tempo.</p>
+        </div>
+        <div class="breadcrumb">
+            <ul>
+                <li><%= link_to "Home", root_url %></li>
+                <li>Sign up</li>
+            </ul>
+        </div>
+    </div>
+</section>
+<!-- End: Page Banner -->
+
+<!-- Start: Cart Section -->
+<div id="content" class="site-content">
+    <div id="primary" class="content-area">
+        <main id="main" class="site-main">
+            <div class="signin-main">
+                <div class="container">
+                    <div class="woocommerce">
+                        <div class="woocommerce-login">
+                            <div class="company-info signin-register">
+                                <div class="col-md-6 col-md-offset-4">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="company-detail bg-dark margin-left">
+                                                <div class="signup-head">
+                                                    <h2 style="text-align: center;" >Sign up</h2>
+                                                    <span class="underline center"></span>
+                                                </div>
+                                                <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+                                                  <%= f.error_notification %>
+
+                                                  <div class="form-inputs">
+                                                    <%=  f.input :name %>
+                                                    <%= f.input :email,
+                                                                required: true,
+                                                                autofocus: true,
+                                                                input_html: { autocomplete: "email" }%>
+                                                    <%= f.input :password,
+                                                                required: true,
+                                                                hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
+                                                                input_html: { autocomplete: "new-password" } %>
+                                                    <%= f.input :password_confirmation,
+                                                                required: true,
+                                                                input_html: { autocomplete: "new-password" } %>
+                                                  </div>
+
+                                                  <div class="form-actions">
+                                                    <%= f.button :submit, "Sign up" %>
+                                                  </div>
+                                                <% end %>
+
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>

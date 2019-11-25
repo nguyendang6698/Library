@@ -1,0 +1,9 @@
+<a data-toggle="dropdown" class="dropdown-toggle" href="#" id="item-count">
+    <i class="fa fa-shopping-cart"></i>
+    <% if requests %>
+    	<% c = requests.count +1 %>
+        <small><%= c %></small>
+    <% else %>
+        <small>1</small>
+    <% end %>
+</a>

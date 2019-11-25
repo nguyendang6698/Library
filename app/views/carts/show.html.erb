@@ -1,0 +1,108 @@
+<%= render "banner" %>
+<% if @cart.verify == 3 %>
+  <div class="table-users">
+    <div class="header">Carts</div>
+      <table cellspacing="0">
+        <tr>
+           <th>Book</th>
+           <th>Available</th>
+           <th>Get</th>
+           <th style="width: 70px;">DayFrom</th>
+           <th style="width: 70px;">DayTo</th>
+           <th style="width: 10px;">Option</th>
+        </tr>
+        <% @requests.each do |r|  %>
+          <%= render partial: "carts/request", object: r, as: :r %>
+        <% end %>
+      </table>
+  </div>
+    <div style="float:right; margin-right: 19%">
+      <%= link_to "Borrow", confirm_cart_path(@cart.id), id: "borrow", class: "btn btn-borrow"%>
+    </div>
+<% else %>
+  <h1 style="text-align: center; margin-top: 100px;">
+    Your cart is emptying <i class="far fa-frown"></i>
+  </h1>
+<% end %>
+
+
+<style type="text/css">
+    .btn-borrow{
+      background-color: #ff7236;
+      color: white;
+     
+    }
+    .btn-borrow:hover{
+      background-color: #ff4e03;
+      color: #white;
+    }
+</style>
+
+<script type="text/javascript">
+ 
+ link = window.location.href
+  
+  // $('#request_number').change(function(e){
+  //   if($(this).val() > 100)
+  //   {
+  //     e.preventDefault();
+  //   }
+  // })
+
+  var dateto = Array.from(document.querySelectorAll("#request_dateto"));
+  var quantity = Array.from(document.querySelectorAll("#request_number"))
+  var arr1 = dateto.map(d=>d.value)
+  var  arr2 = quantity.map(d=>d.value)
+  console.log(quantity)
+  $(document).on('click keyup','#request_number, #request_dateto', function(){
+    quantity = Array.from(document.querySelectorAll("#request_number"))
+    dateto = Array.from(document.querySelectorAll("#request_dateto"))
+    arr2 = quantity.map(d=>d.value)
+    arr1 = dateto.map(d=>d.value)
+    // console.log(arr1)
+  })
+  // $(document).on('click','#request_dateto', function(){
+  //   var d = Array.from(document.querySelectorAll("#request_dateto"))
+  //   dateto = d;
+  //    var arr1 = dateto.map(d=>d.value)
+
+  // })
+ // var dateto = Array.from(document.querySelectorAll("#request_dateto"));
+ // var quantity = Array.from(document.querySelectorAll("#request_quantity_get"));
+
+   // console.log(arr2)
+   $('#borrow').click(function(e){
+      // console.log(arr2)
+      e.preventDefault();
+       var i = 0;
+       $.ajax({
+          method: "POST",
+          url: "/carts/"+"<%=@cart.id%>"+"/confirm",
+          data: {"dateto": arr1, "number": arr2},
+          dataType: "script",
+          success: function(res)
+          {
+            // i = i +1;
+            // window.location.href = "/books"
+            console.log(res)
+            // console.log(i.toString())
+          },
+          error: function(err)
+          {
+            console.log(err)
+          }
+        })    
+   })
+    
+ //  update_params() 
+ //  for (var i = 0; i < dateto.length; i++) {
+ //    dateto[i].addEventListener("change", function() {
+ //      update_params()
+ //    });
+ //  }
+ //  for (var i = 0; i < quantity.length; i++) {
+ //    quantity[i].addEventListener("change", function() {
+ //      update_params()
+ //    });
+ //  }
+</script>

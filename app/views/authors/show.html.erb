@@ -1,0 +1,138 @@
+<%= render "banner" %>
+<div id="content" class="site-content">
+        <div id="primary" class="content-area">
+            <main id="main" class="site-main">
+                <div class="books-media-list">
+                    <div class="container">
+                        <div class="row">
+                             <%= render "search" %>
+                        </div>
+                    </div> 
+                </div>
+            </main>
+            <div class="row">
+                <div class="col-md-9 col-md-push-3">
+                    <div class="booksmedia-detail-box">
+                        <div class="single-book-box">                                                
+                            <div class="post-thumbnail">
+                                <div></div>
+                                <%= image_tag @author.author_img.url(:author_show), class: "author_show",style:"height: 450px; width: 320px; border: 7px solid #D3D3D3;"%>                                                    
+                            </div>
+                            <div class="post-detail" style="margin-right: 70px;">
+                                <div class="books-social-sharing">
+                                    <ul>
+                                        <li><a href="#" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                                        <li><a href="#" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                                        <li><a href="#" target="_blank"><i class="fa fa-google-plus"></i></a></li>
+                                        <li><a href="#" target="_blank"><i class="fa fa-rss"></i></a></li>
+                                        <li><a href="#" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+                                    </ul>
+                                </div>
+                                <div class="optional-links">
+                                    <ul>
+                                        <li>
+                                            <a href="#" target="_blank" data-toggle="blog-tags" data-placement="top" title="Like">
+                                                <i class="fa fa-heart"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" target="_blank" data-toggle="blog-tags" data-placement="top" title="Mail"><i class="fa fa-envelope"></i>
+                                            </a>
+                                        </li>
+                                        
+                                    </ul>
+                                </div>
+                                <header class="entry-header">
+                                    <h2 class="entry-title"><%= @author.name%></h2>
+                                    <ul>
+                                        <li><strong>Email: </strong><%= @author.email%></li>
+                                        <li><strong>Amount of books: </strong><%= @author.books.count%></li>
+                                    </ul>
+                                </header>
+                               
+                            </div>
+                        </div>
+                        <p style="margin-right: 50px;"><strong>Description:</strong> <%=@author.info%></p>
+                    </div>
+                    <div class="autoplay">
+                        <%= @author.books.each do |b|%>
+                            <div class="row">
+                                <div class="col-sm-7">
+                                    <%= link_to (image_tag b.book_img.url(:book_index),style:"height: 300px; width: 240px"),b,method: :get%>
+                                </div>
+                                <div  class="col-sm-5" style="margin-top: 30px;padding-left: 0">
+                                    <ul style="list-style-type: none; margin-left:0">
+                                        <li><strong>Summary:</strong> <%=b.content%>...</li>
+                                        <li><strong>ISBN:</strong> 9781581573268</li>
+                                        <li><strong>Edition:</strong> First edition</li>
+                                        <li><strong>Publisher:</strong> <%= b.publisher%></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        <% end %>
+                    </div>
+                </div>
+                <div class="col-md-3 col-md-pull-9">
+                    <aside id="secondary" class="sidebar widget-area" data-accordion-group="">
+                        <div class="widget widget_related_search open" data-accordion="" style="margin-left: 20px">
+                            <h4 class="widget-title" data-control="">Related Searches</h4>
+                            <div data-content="" style="transition: max-height 300ms ease 0s; max-height: 228px; overflow: hidden;">
+                                <div data-accordion="" class="">
+                                    <h5 class="widget-sub-title" data-control="">Categories</h5>
+                                    <div class="widget_categories" data-content="" style="max-height: 0px; overflow: hidden; transition: max-height 300ms ease 0s;">
+                                        <ul>
+                                           
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div data-accordion="" class="">
+                                    <h5 class="widget-sub-title" data-control="">Authors</h5>
+                                    <div class="widget_categories" data-content="" style="max-height: 0px; overflow: hidden; transition: max-height 300ms ease 0s;">
+                                        <ul>
+                                            <% 5.times do |i|%>
+                                                <% a = @authors[i] %>
+                                                <li>
+                                                    <%= link_to a.name+" ("+a.books.count.to_s+")", a, method: :get %>
+                                                </li>
+                                            <% end %>
+                                        </ul>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </div>
+</div>
+
+
+
+<script type="text/javascript">
+  
+$(document).ready(function(){
+  $('.autoplay').slick({
+    infinite: true,
+    slidesToShow: 2,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 1000,
+});
+});
+</script>
+
+<style type="text/css">
+    .slick-slide{
+        
+        height: 300px !important;
+    }
+    .autoplay{
+      /* margin-left: 150px;
+       margin-right: 150px;*/
+    }
+    .autoplay .slick-initialized .slick-slider{
+          
+    }
+</style>

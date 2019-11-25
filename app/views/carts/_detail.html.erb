@@ -1,0 +1,12 @@
+<tr>
+	<% book = Book.find(r.book_id) %>
+	<td>
+		<a href="/books/<%= book.id %>">
+			<img src="<%= book.book_img %>" style="height: 120px;  width:70px">
+		</a>
+		
+	<td><%= book.name %></td>
+	<td><%= r.number %></td>
+	<td><%= r.datefrom%>
+	<td><%= r.dateto%></td>		
+</tr>

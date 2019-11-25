@@ -1,0 +1,60 @@
+<%= render "banner" %>
+
+<!-- Material form login -->
+
+<div id="content" class="site-content">
+    <div id="primary" class="content-area">
+        <main id="main" class="site-main">
+            <div class="signin-main">
+                <div class="container">
+                    <div class="woocommerce">
+                        <div class="woocommerce-login">
+                            <div class="company-info signin-register">
+                                <div class="col-md-6 col-md-offset-3">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="company-detail bg-dark margin-center">
+                                                <div class="signin-head">
+                                                    <h2 style="text-align: center;" >Edit book</h2>
+                                                    <span class="underline center"></span>
+                                                </div>
+                                                    <%= form_for @book, method: :patch do |f| %>
+														<%= f.text_field :name, class: "form-control", placeholder: "Name" %>
+														<%= f.file_field :book_img, class: "form-control"%>
+														<%= f.collection_select :author_id, Author.all, :id, :name, prompt: "Select author",class: "select-control"%>
+														
+                                                         <%= f.text_area :content, class: "form-control", placeholder: "Content..." %>
+														<%= f.number_field :quantity,class: "form-control", placeholder: "Quantity" %>
+														<%= f.text_field :publisher,class: "form-control", placeholder: "Publisher" %>
+														<div class="form-actions" style="text-align: center; padding-top: 20px;">
+															<%= f.button "Save" %>     
+										                </div>
+													<% end %>
+                         
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+
+<style type="text/css">
+	.select-styled{
+		color: #707070;
+		background-color: #202020;
+		border-color: #1e1e1e;
+		margin-top: 10px;
+	}
+	.form-control{
+		margin-top: 10px;
+		color: #707070;
+		background-color: #202020;
+		border: 1px solid #202020
+	}
+</style>

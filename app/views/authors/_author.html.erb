@@ -1,0 +1,33 @@
+<li>
+    <div class="book-list-icon red-icon"></div>
+    <figure>
+        <a>
+            <%= link_to (image_tag author.author_img.url(:author_index), class: "author_index",style:"height: 450px; width: 355px"),author,method: :get%>
+        </a>
+        <figcaption>
+            <header>
+                <h4><%= link_to author.name, author,method: :get%></h4>
+            </header>
+            <p><%= author.info%></p>
+            <div class="actions">
+                <ul>
+                    <li>
+                        <a href="#" target="_blank" data-toggle="blog-tags" data-placement="top" title="Like">
+                            <i class="fa fa-heart"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" target="_blank" data-toggle="blog-tags" data-placement="top" title="Print">
+                            <i class="fa fa-print"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" target="_blank" data-toggle="blog-tags" data-placement="top" title="Share">
+                            <i class="fa fa-share-alt"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </figcaption>
+    </figure>                                                
+</li>

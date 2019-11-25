@@ -1,0 +1,17 @@
+ <li class="clearfix">
+    <div id="cart-item-delete">
+        <% book = Book.find(r.book_id)%>
+        <a href="books/<%= book.id%>">
+            <img src="<%= book.book_img %>", style="height: 70px; width: 45px">
+        </a>        
+        <div class="item-info">
+            <div class="name">
+                <%= link_to book.name, book %>
+            </div>
+            <div class="author"><strong>Author:</strong> <%= book.author.name%></div>
+        </div>
+        <%= link_to r, class: "remove remove-item", method: :delete, data:{confirm: "You sure?"} do %>
+            <i class="fa fa-trash-o"></i>
+        <% end %>
+    </div>
+</li>

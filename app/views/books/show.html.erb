@@ -1,0 +1,208 @@
+<%= render "banner" %>
+<div id="content" class="site-content">
+        <div id="primary" class="content-area">
+            <main id="main" class="site-main">
+                <div class="books-media-list">
+                    <div class="container">
+                        <div class="row">
+                             <%= render "search" %>
+                        </div>
+                    </div> 
+                </div>
+            </main>
+            <div class="row">
+                <div class="col-md-9 col-md-push-3">
+                    <div class="booksmedia-detail-box">
+                        <div class="single-book-box">                                                
+                            <div class="post-thumbnail">
+                                <div class="book-list-icon yellow-icon"></div>
+                                <img src="<%= @book.book_img %>", style="height: 450px; width: 320px">
+                            </div>
+                            <div class="post-detail" style="margin-right: 70px;">
+                                <div class="books-social-sharing">
+                                    <ul>
+                                        <li><a href="#" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                                        <li><a href="#" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                                        <li><a href="#" target="_blank"><i class="fa fa-google-plus"></i></a></li>
+                                        <li><a href="#" target="_blank"><i class="fa fa-rss"></i></a></li>
+                                        <li><a href="#" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+                                    </ul>
+                                </div>
+                                <div class="optional-links">
+                                    <ul>
+                                        <li>
+                                            <a href="#" target="_blank" data-toggle="blog-tags" data-placement="top" title="Add To Cart">
+                                                <i class="fa fa-shopping-cart"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" target="_blank" data-toggle="blog-tags" data-placement="top" title="Like">
+                                                <i class="fa fa-heart"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" target="_blank" data-toggle="blog-tags" data-placement="top" title="Mail"><i class="fa fa-envelope"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" target="_blank" data-toggle="blog-tags" data-placement="top" title="Search">
+                                                <i class="fa fa-search"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" target="_blank" data-toggle="blog-tags" data-placement="top" title="Print">
+                                                <i class="fa fa-print"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <header class="entry-header">
+                                    <h2 class="entry-title"><%= @book.name %></h2>
+                                    <ul>
+                                        <li><strong>Author:</strong> <%= link_to @book.author.name, @book.author,method: :get, class: "book-author"%></li>
+                                        <li><strong>ISBN:</strong> 9781581573268</li>
+                                        <li><strong>Edition:</strong> First edition</li>
+                                        <li><strong>Publisher:</strong> <%= @book.publisher%></li>
+                                        <li><strong>Quantity:</strong> <%= get_quantity(@book.id)%></li>
+                                    </ul>
+                                </header>
+                                <div class="entry-content post-buttons">
+                                    <%= link_to requests_path(book_id: @book.id),
+                                    {
+                                        class: "add-to-cart btn btn-dark-gray",
+                                        method: :post, 
+                                        remote: true
+                                    } do%>
+                                        <i class="fas fa-shopping-cart"></i> Add to Cart
+                                    <% end %>
+                                    <% if current_user.role == 1 %>
+                                        <%= link_to edit_book_path,
+                                        {
+                                            class: " btn btn-edit",
+                                        } do %>
+                                            <i class="far fa-edit"></i> Edit
+                                        <% end %>
+                                    <% end %>
+                                </div>
+                            </div>
+                        </div>
+                        <p style="margin-right: 50px;"><strong>Summary:</strong> <%=@book.content%></p>
+                        <ul class="detail-page-listing">
+                            <li><strong>Length:</strong> <%= @book.page%> Pages</li>
+                            <li><strong>Format:</strong> DVD</li>
+                            <li><strong>Language Note:</strong> Icelandic dialogue; English subtitles.</li>
+                            <li><strong>Genre :</strong> Feature films, Fiction films, Drama</li>
+                             <li><strong>Topics:</strong> Friendship, Bullies, Pranks, School</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-3 col-md-pull-9">
+                    <aside id="secondary" class="sidebar widget-area" data-accordion-group="">
+                        <div class="widget widget_related_search open" data-accordion="" style="margin-left: 20px">
+                            <h4 class="widget-title" data-control="">Related Searches</h4>
+                            <div data-content="" style="transition: max-height 300ms ease 0s; max-height: 228px; overflow: hidden;">
+                                <div data-accordion="" class="">
+                                    <h5 class="widget-sub-title" data-control="">Categories</h5>
+                                    <div class="widget_categories" data-content="" style="max-height: 0px; overflow: hidden; transition: max-height 300ms ease 0s;">
+                                        <ul>
+                                            <% @categories.each do |c| %>
+                                                <li><a href="#"><%= c.name %><span>(<%=c.books.count%>)</span></a></li>
+                                            <% end %>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div data-accordion="" class="">
+                                    <h5 class="widget-sub-title" data-control="">Authors</h5>
+                                    <div class="widget_categories" data-content="" style="max-height: 0px; overflow: hidden; transition: max-height 300ms ease 0s;">
+                                        <ul>
+                                            <% 5.times do |i|%>
+                                                <% a = @authors[i] %>
+                                                <li>
+                                                    <%= link_to a.name+" ("+a.books.count.to_s+")", a, method: :get %>
+                                                </li>
+                                            <% end %>
+                                        </ul>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </div>
+</div>
+<style type="text/css">
+    a.book-author{
+       color: #ff7236;     
+    }
+    a.book-author:hover
+       {
+        color: gray;
+    }
+</style>
+<script type="text/javascript">
+    var check = 0
+$('.add-to-cart').click(function(){
+    var user = "<%= current_user.nil?%>"
+    if (user == "true")
+    {
+         alertify
+         .alert("Please login!").setHeader('<em>Thong bao</em>');
+    }
+    else
+    {   
+        var check_quantity ="<%= get_quantity(@book.id) %>"
+        var check_dup_book = "<%= check_item_cart(@book.id) %>"
+        if (check_quantity == "0")
+        {
+            alertify
+            .alert("Out of stock").setHeader('<em>Thong bao</em>');
+        }
+        else
+        {   
+            if (check_dup_book == "true" || check == 1)
+            {
+                alertify
+                .alert("Duplicate item in cart!").setHeader('<em>Thong bao</em>');
+            }
+            else
+            {   
+                //ajax {
+                    //type:GET
+                // }
+                alertify
+                .alert("Added to cart").setHeader('<em>Thong bao</em>');
+                if($('.carts-append li').text() == "Emptying")
+                {    
+                    $('.carts-append').html("<%= j render partial: "requests/item", object: @book, as: :book %>")
+                    $('.carts-append').append("<%= j render partial: "layouts/view_cart_btn" %>")
+                }
+                else
+                {   
+                    $('.carts-append').prepend("<%= j render partial: "requests/item", object: @book, as: :book %>")
+                }
+                check = 1
+            }
+            
+        }
+    }
+    
+   
+  
+})
+  
+</script>
+
+
+<style type="text/css">
+    .btn-edit{
+        background-color: #138496;
+        border-color: #117a8b;
+    }
+    .btn-edit:hover{
+        background-color: orange;   
+    }
+</style>

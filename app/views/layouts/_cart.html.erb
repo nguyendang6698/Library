@@ -1,0 +1,27 @@
+<div class="header-cart dropdown">
+    <a data-toggle="dropdown" class="dropdown-toggle" href="#" id="item-count">
+        <i class="fa fa-shopping-cart"></i>
+        <% if requests %>
+            <small><%=requests.count%></small>
+        <% else %>
+            <small>0</small>
+        <% end %>
+        
+    </a>
+    <div class="dropdown-menu cart-dropdown">
+        <% if user_signed_in? %> 
+            <ul class="carts-append">
+                <% if !requests.nil?  && requests.count !=0  %>
+                    <% requests.each do |r| %>
+                       <%= render partial: "/layouts/item", object: r, as: :r %>
+                    <% end %>
+                    <%= render "layouts/view_cart_btn" %>
+                <% else %>
+                     <li style="margin-top: 17px; text-align: center;">Emptying</li>
+                <% end%>
+            </ul>
+        <% else %>
+            <li style="margin-top: 17px;"><%= link_to "Please login",new_user_session_path,method: :get %> </li>
+        <% end %>
+    </div>
+</div>

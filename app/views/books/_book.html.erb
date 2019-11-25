@@ -1,0 +1,39 @@
+<li>
+    <div class="book-list-icon yellow-icon"></div>
+    <figure>
+        <a href="books/<%= book.id%>">
+            <img src="<%= book.book_img %>" class="book_index" style="height: 450px; width: 355px">      
+        </a>
+        <figcaption>
+            <header>
+                <h4><%= link_to book.name, book,method: :get%></h4>
+                <p><strong>Author:</strong><%= book.author.name %></p>
+            </header>
+            <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. Pellentesque dolor turpis, pulvinar varius.</p>
+            <div class="actions">
+                <ul>
+                    <li>
+                        <a href="#" target="_blank" data-toggle="blog-tags" data-placement="top" title="Add TO CART">
+                            <i class="fa fa-shopping-cart"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" target="_blank" data-toggle="blog-tags" data-placement="top" title="Like">
+                            <i class="fa fa-heart"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" target="_blank" data-toggle="blog-tags" data-placement="top" title="Print">
+                            <i class="fa fa-print"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" target="_blank" data-toggle="blog-tags" data-placement="top" title="Share">
+                            <i class="fa fa-share-alt"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </figcaption>
+    </figure>                                                
+</li>

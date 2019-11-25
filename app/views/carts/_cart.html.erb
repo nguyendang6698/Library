@@ -1,0 +1,21 @@
+<tr>
+	<% u = User.find(c.user_id) %>
+	<td><%= u.name %></td>
+	<td><%= u.email%></td>
+	<td><%= c.requests[0].datefrom %></td>
+	<% if check_status(c) == "Pending" %>
+		<td>
+			<%= link_to "", accept_cart_path(c) ,class: "fas fa-check fa-2x",style: "color: green" %>
+			<%= link_to "", decline_cart_path(c) ,class: "fa fa-times fa-2x",style: "color: red; padding-left: 30px;"%>
+		</td>
+	<% else %>
+		<% if  check_status(c) == "Accept" %>
+			<td style="color: green"><%= check_status(c) %></td>
+		<% elsif check_status(c) == "Decline" %>
+			<td style="color: red"><%= check_status(c) %></td>
+		<% end %>
+	<% end %>
+	<td>
+		<%= link_to "", detail_cart_path(c), class: "fas fa-info fa-2x",style: "color: #035777; padding-left: 17px" %>
+	</td>
+</tr>

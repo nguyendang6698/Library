@@ -1,0 +1,23 @@
+<%= render "banner" %>
+
+<% if @requests_detail  %>
+  <div class="table-users">
+    <div class="header">Carts</div>
+      <table cellspacing="0">
+        <tr>
+           <th width="20%">Book</th>
+           <th width="20%">Namebook</th>
+           <th width="10%">Get</th>
+           <th width="25%">DayFrom</th>
+           <th width="25%">DayTo</th>
+        </tr>
+        <% @requests_detail.each do |r| %>
+          <%= render partial: "carts/detail", object: r, as: :r %>
+        <% end %>
+      </table>
+  </div>
+<% else %>
+  <h1 style="text-align: center; margin-top: 100px;">
+    Your cart is emptying <i class="far fa-frown"></i>
+  </h1>
+<% end %>

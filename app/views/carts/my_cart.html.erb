@@ -1,0 +1,30 @@
+<%= render "banner" %>
+      <!-- # 3: carting, 0:pending, 1: accept, 2: decline -->
+<% if user_signed_in? && @carts  && @carts.last && !@carts.last.requests.blank?%>
+	<div class="table-users" style="margin-top: 70px;">
+	   <div class="header">History of Trading</div>
+	   <table cellspacing="0">
+	      <tr>
+	         <th>User</th>
+	         <th>Email</th>
+	         <th>Date</th>
+	         <th>Status</th>
+	         <th>Option</th>
+	      </tr>
+
+	      <% @carts.each do |c| %>
+	      	<%= render partial: "carts/my_cart", object: c, as: :c %>
+	      <% end %>
+	      
+	   </table>
+	</div>
+<% else %>
+	<h1 style="text-align: center; margin-top: 100px;">
+		Your history's cart is emptying <i class="far fa-frown"></i>
+	</h1>
+	<%= link_to books_url  do %>
+  		<h3 style="text-align: center; ">
+		 	<i class= "fas fa-arrow-right"></i>Go to Book & Media
+		</h3>
+	<% end %>
+<% end %>

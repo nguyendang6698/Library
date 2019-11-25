@@ -1,0 +1,16 @@
+ <li class="clearfix">
+    <% book = Book.find(@book.id)%>
+    <a href="/books/<%= book.id%>">
+        <img src="<%= book.book_img %>", style="height: 70px; width: 45px">
+    </a>
+    <div class="item-info">
+        <div class="name">
+            <a href="#">The Great Gatsby</a>
+        </div>
+        <p><%=  %></p>
+        <div class="author"><strong>Author:</strong> F. Scott Fitzgerald</div>
+    </div>
+    <%= link_to request_path, class: "remove remove-item", method: :delete, data:{confirm: "You sure?"} do %>
+            <i class="fa fa-trash-o"></i>
+    <% end %>
+</li>

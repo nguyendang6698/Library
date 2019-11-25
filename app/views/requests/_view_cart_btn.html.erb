@@ -1,0 +1,6 @@
+<% if user_signed_in?%>
+	<div class="cart-buttons">
+    	<%= link_to "View Cart", cart_path((Cart.find_by(user_id: current_user.id).last) ,class: "btn btn-dark-gray" %>
+	</div>
+<% end %>
+	

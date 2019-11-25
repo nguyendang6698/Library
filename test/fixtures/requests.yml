@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  number: 1
+  datefrom: 2019-06-19 20:52:25
+  dateto: 2019-06-19 20:52:25
+
+two:
+  number: 1
+  datefrom: 2019-06-19 20:52:25
+  dateto: 2019-06-19 20:52:25

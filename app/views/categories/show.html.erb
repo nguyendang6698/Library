@@ -1,0 +1,9 @@
+<% provide :title, @category.name %>
+<h1><%= @category.name+"(#{@category.books.count})" %></h1>
+
+<div>
+  <ul class="row">
+       <%= render @books %>     
+  </ul> 
+</div>
+

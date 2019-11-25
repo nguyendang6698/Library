@@ -1,0 +1,43 @@
+<% @user ||= current_user %>
+<div class="stats">
+
+  <a href="<%= following_user_path(@user) %>">
+   <strong id ="following" class="stat">
+    <%= @user.following.count %>
+   </strong>
+   following user
+  </a>
+  <a  href="<%= followers_user_path(@user) %>">
+   <strong id ="followers" class="stat">
+   <%= @user.followers.count %>
+   </strong>
+   followers
+  </a>
+
+</div>
+
+<div>
+
+  <a  href="<%= followingbook_user_path(@user) %>">
+   <strong id ="followingbook" class="stat">
+   <%= @user.follows.where(target_type: "Book").count %>
+   </strong>
+   following book
+  </a>
+
+  <a  href="<%= likebook_user_path(@user) %>">
+     <strong id ="likebook" class="stat">
+      <%= @user.liked_books.count %>
+     </strong>
+     liked books
+  </a>  
+
+  <a  href="<%= followingauthor_user_path(@user) %>">
+     <strong id ="followingauthor" class="stat">
+     <%= @user.follows.where(target_type: "Author").count %>
+     </strong>
+     following author
+  </a> 
+
+</div> 
+
